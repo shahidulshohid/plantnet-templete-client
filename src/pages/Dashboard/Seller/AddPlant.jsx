@@ -10,7 +10,10 @@ const AddPlant = () => {
   const {user} = useAuth()
   const axiosSecure = useAxiosSecure()
 
-  const [uploadButtonText, setUploadButtonText] = useState({name:'Upload Button'})
+  const [uploadImage, setUploadImage] = useState({
+    image: {name: 'Upload Button'}
+  })
+  console.log(uploadImage)
   const [loading, setLoading] = useState(false)
   const handleSubmit = async(e) => {
     setLoading(true)
@@ -53,7 +56,7 @@ const AddPlant = () => {
       </Helmet>
 
       {/* Form */}
-      <AddPlantForm handleSubmit={handleSubmit} uploadButtonText={uploadButtonText} setUploadButtonText={setUploadButtonText} loading={loading}/>
+      <AddPlantForm handleSubmit={handleSubmit} uploadImage={uploadImage} setUploadImage={setUploadImage} loading={loading}/>
     </div>
   )
 }

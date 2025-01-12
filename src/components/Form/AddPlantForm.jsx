@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import { TbFidgetSpinner } from "react-icons/tb";
 const AddPlantForm = ({
   handleSubmit,
-  uploadButtonText,
-  setUploadButtonText,
+  uploadImage, 
+  setUploadImage,
   loading,
 }) => {
   return (
@@ -95,7 +95,7 @@ const AddPlantForm = ({
                   <label>
                     <input
                       className="text-sm cursor-pointer w-36 hidden"
-                      onChange={(e) => setUploadButtonText(e.target.files[0])}
+                      onChange={(e) => setUploadImage({image:e.target.files[0], url:URL.createObjectURL(e.target.files[0])})}
                       type="file"
                       name="image"
                       id="image"
@@ -103,14 +103,17 @@ const AddPlantForm = ({
                       hidden
                     />
                     <div className="bg-lime-500 text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-500">
-                      {uploadButtonText.name}
+                      {uploadImage?.image?.name}
                     </div>
                   </label>
                 </div>
               </div>
             </div>
-            {uploadButtonText.size && (
-              <p>Image size: {uploadButtonText.size} Bytes</p>
+            {uploadImage && uploadImage?.image?.size && (
+              <div className="flex gap-5 items-center">
+              <img className="w-20" src={uploadImage?.url} alt="" />
+              <p>Image size: {uploadImage?.image?.size} Bytes</p>
+              </div>
             )}
 
             {/* Submit Button */}
@@ -132,9 +135,9 @@ const AddPlantForm = ({
 };
 AddPlantForm.propTypes = {
   handleSubmit: PropTypes.func,
-  uploadButtonText: PropTypes.string,
-  setUploadButtonText: PropTypes.func,
-  loading:PropTypes.string,
+  uploadImage: PropTypes.object,
+  setUploadImage: PropTypes.func,
+  loading:PropTypes.bool,
 };
 
 export default AddPlantForm;
