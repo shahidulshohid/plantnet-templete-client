@@ -57,7 +57,10 @@ const PurchaseModal = ({ closeModal, isOpen, plant, refetch }) => {
       //save data in db
       await axiosSecure.post('/order', purchaseInfo)
       //decrease quantity from plant collection
-      await axiosSecure.patch(`/plants/quantity/${_id}`, {quantityToUpdate: totalQuantity})
+      await axiosSecure.patch(`/plants/quantity/${_id}`, {
+        quantityToUpdate: totalQuantity,
+        status: 'decrease'
+      })
       toast.success('Order successfully!')
       refetch()
       navigate('/dashboard/my-orders')
